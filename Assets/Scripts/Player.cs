@@ -7,10 +7,40 @@ public class Player : MonoBehaviour
     [SerializeField] private LayerMask countersLayerMask;
     private bool isWalking;
     private Vector3 lastInteration;
+
+    private void Start()
+    {
+        GameInput.Instance.OnInteractAction += Instance_OnInteractAction;
+    }
+
+    private void Instance_OnInteractAction(object sender, System.EventArgs e)
+    {
+        Vector2 inputVector = GameInput.Instance.GetMovementVectorNormalized();
+        Vector3 moveDir = new Vector3(inputVector.x, 0, inputVector.y);
+
+        if (moveDir != Vector3.zero)
+        {
+            lastInteration = moveDir;
+        }
+        float interactDistance = 2f;
+        if (Physics.Raycast(transform.position, lastInteration, out RaycastHit raycastHit, interactDistance, countersLayerMask))
+        {
+            if (raycastHit.transform.TryGetComponent<ClearCounter>(out ClearCounter clearCounter))
+            {
+                clearCounter.Interact();
+            }
+
+        }
+        else
+        {
+            Debug.Log("Raycast did not hit anything");
+        }
+    }
+
     private void Update()
     {
         HandleMovement();
-        HnadleInteractions();   
+        //HnadleInteractions();   
 
     }
 
@@ -24,18 +54,18 @@ public class Player : MonoBehaviour
         Vector2 inputVector = GameInput.Instance.GetMovementVectorNormalized();
         Vector3 moveDir = new Vector3(inputVector.x, 0, inputVector.y);
 
-        if(moveDir != Vector3.zero)
+        if (moveDir != Vector3.zero)
         {
             lastInteration = moveDir;
         }
         float interactDistance = 2f;
-        if(Physics.Raycast(transform.position, lastInteration, out RaycastHit raycastHit, interactDistance, countersLayerMask))
+        if (Physics.Raycast(transform.position, lastInteration, out RaycastHit raycastHit, interactDistance, countersLayerMask))
         {
-          if(  raycastHit.transform.TryGetComponent<ClearCounter>(out ClearCounter clearCounter))
+            if (raycastHit.transform.TryGetComponent<ClearCounter>(out ClearCounter clearCounter))
             {
                 clearCounter.Interact();
             }
-      
+
         }
         else
         {
