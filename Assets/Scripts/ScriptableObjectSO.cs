@@ -6,7 +6,7 @@ public class ScriptableObjectSO : ScriptableObject
 {
     public Transform Prefab;
     public Sprite sprite;
-   [SerializeField] private string objectName;
+   [SerializeField] public string objectName;
 
 
 }
