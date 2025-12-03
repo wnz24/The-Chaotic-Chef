@@ -2,16 +2,21 @@ using System;
 using UnityEngine;
 
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour,IKitchenObjectParent
 {
     //everything else will have both read and write access
     public static Player Instance { get; set; }
 
     [SerializeField] private float moveSpeed = 7f;
     [SerializeField] private LayerMask countersLayerMask;
+    [SerializeField] private Transform KitchenObjectHoldPoint;
+
+
     private bool isWalking;
     private Vector3 lastInteration;
+
     private ClearCounter SelectedCounter;
+    private KitchenObject KitchenObject;
 
     //Events
     //Generic
@@ -40,7 +45,7 @@ public class Player : MonoBehaviour
     {
         if(SelectedCounter != null)
         {
-            SelectedCounter.Interact();
+            SelectedCounter.Interact(this);
             return;
         }
        
@@ -150,5 +155,29 @@ public class Player : MonoBehaviour
         {
             selectedCounter = SelectedCounter
         });
+    }
+
+    public Transform GetKitchenObjectFollowTransform()
+    {
+        return KitchenObjectHoldPoint;
+    }
+
+    public void SetKitchenObject(KitchenObject kitchenObject)
+    {
+        this.KitchenObject = kitchenObject;
+    }
+
+    public KitchenObject GetKitchenObject()
+    {
+        return KitchenObject;
+    }
+    public void ClearKitchenObject()
+    {
+        KitchenObject = null;
+    }
+
+    public bool HasKitchenObject()
+    {
+        return KitchenObject != null;
     }
 }
