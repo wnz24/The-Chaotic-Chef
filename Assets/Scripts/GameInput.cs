@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 public class GameInput : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class GameInput : MonoBehaviour
 
 
     public event EventHandler OnInteractAction;
+    public event EventHandler OnAlternateInteractAction;
 
     private void Awake()
     {
@@ -18,7 +20,13 @@ public class GameInput : MonoBehaviour
         playerInputActions.Player.Enable();
 
         playerInputActions.Player.interact.performed += Interact_performed;
+        playerInputActions.Player.alternateInteract.performed += AltenateInteract_performed;
 
+    }
+
+    private void AltenateInteract_performed(InputAction.CallbackContext context)
+    {
+        OnAlternateInteractAction?.Invoke(this, EventArgs.Empty);
     }
 
     private void Interact_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
@@ -28,7 +36,7 @@ public class GameInput : MonoBehaviour
     }
 
     public Vector2 GetMovementVectorNormalized()
-    {
+    { 
         Vector2 inputVector = playerInputActions.Player.move.ReadValue<Vector2>();
         
         return inputVector.normalized;
