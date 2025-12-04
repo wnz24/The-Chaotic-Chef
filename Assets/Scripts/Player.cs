@@ -15,7 +15,7 @@ public class Player : MonoBehaviour,IKitchenObjectParent
     private bool isWalking;
     private Vector3 lastInteration;
 
-    private ClearCounter SelectedCounter;
+    private BaseCounter SelectedCounter;
     private KitchenObject KitchenObject;
 
     //Events
@@ -33,15 +33,15 @@ public class Player : MonoBehaviour,IKitchenObjectParent
 
     public class OnSelectedCounterChangedEventArgs : EventArgs
     {
-        public ClearCounter selectedCounter;
+        public BaseCounter selectedCounter;
     }
 
     private void Start()
     {
-        GameInput.Instance.OnInteractAction += Instance_OnInteractAction;
+        GameInput.Instance.OnInteractAction += GameInput_OnInteractAction;
     }
 
-    private void Instance_OnInteractAction(object sender, System.EventArgs e)
+    private void GameInput_OnInteractAction(object sender, System.EventArgs e)
     {
         if(SelectedCounter != null)
         {
@@ -75,7 +75,7 @@ public class Player : MonoBehaviour,IKitchenObjectParent
         float interactDistance = 2f;
         if (Physics.Raycast(transform.position, lastInteration, out RaycastHit raycastHit, interactDistance, countersLayerMask))
         {
-            if (raycastHit.transform.TryGetComponent<ClearCounter>(out ClearCounter clearCounter))
+            if (raycastHit.transform.TryGetComponent<BaseCounter>(out BaseCounter clearCounter))
             {
                 if (clearCounter != SelectedCounter)
                 {
@@ -148,7 +148,7 @@ public class Player : MonoBehaviour,IKitchenObjectParent
         //Debug.Log($"Input Vector: {inputVector}");
     }
 
-    private void SetSelectedCounter (ClearCounter selectedCounter)
+    private void SetSelectedCounter (BaseCounter selectedCounter)
     {
         this.SelectedCounter = selectedCounter;
         OnSelectedCounterChanged?.Invoke(this, new OnSelectedCounterChangedEventArgs
