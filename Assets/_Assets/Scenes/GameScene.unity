@@ -1269,6 +1269,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: CuttingCounter
       objectReference: {fileID: 0}
+    - target: {fileID: 6790638585972030361, guid: 2477e8ec2cf6329439e2b1f71405bb7a, type: 3}
+      propertyPath: cuttingRecipeSOArray.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6790638585972030361, guid: 2477e8ec2cf6329439e2b1f71405bb7a, type: 3}
+      propertyPath: 'cuttingRecipeSOArray.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: d67cce0275388194b859f0bc41718591, type: 2}
+    - target: {fileID: 6790638585972030361, guid: 2477e8ec2cf6329439e2b1f71405bb7a, type: 3}
+      propertyPath: 'cuttingRecipeSOArray.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: d891b7d8b40ac214cbe6738611cd24a7, type: 2}
+    - target: {fileID: 6790638585972030361, guid: 2477e8ec2cf6329439e2b1f71405bb7a, type: 3}
+      propertyPath: 'cuttingRecipeSOArray.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 7c9832b8f1af2a245bafc89654899bf2, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

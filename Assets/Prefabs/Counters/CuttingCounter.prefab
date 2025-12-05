@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1013778786120112192, guid: 0a463e79886ea72448a9c117b3e90a70, type: 3}
       propertyPath: m_Name
-      value: CuttingCounterVariant
+      value: CuttingCounter
       objectReference: {fileID: 0}
     - target: {fileID: 1340244721827548909, guid: 0a463e79886ea72448a9c117b3e90a70, type: 3}
       propertyPath: m_LocalPosition.x
@@ -89,7 +89,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CounterTopPoint: {fileID: 7438651255142468354}
-  cutKitchenObjectSO: {fileID: 11400000, guid: 999b8b33108e6244e82e5f41537a608c, type: 2}
+  cuttingRecipeSOArray:
+  - {fileID: 11400000, guid: d67cce0275388194b859f0bc41718591, type: 2}
+  - {fileID: 11400000, guid: d891b7d8b40ac214cbe6738611cd24a7, type: 2}
+  - {fileID: 11400000, guid: 7c9832b8f1af2a245bafc89654899bf2, type: 2}
 --- !u!4 &7438651255142468354 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6701358881703124089, guid: 0a463e79886ea72448a9c117b3e90a70, type: 3}
