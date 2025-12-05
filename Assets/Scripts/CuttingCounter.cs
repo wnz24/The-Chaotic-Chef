@@ -42,10 +42,7 @@ public class CuttingCounter : BaseCounter
         {
             //There is Kitchen Object
             GetKitchenObject().DestroySelf();
-            Debug.Log("Cutting Counter - Cutting Action Performed");
-            Transform KitchenObjectTransform = Instantiate(cutKitchenObjectSO.Prefab);
-            KitchenObjectTransform.GetComponent<KitchenObject>().SetKitchenObjectParent(this);
-
+            KitchenObject.SpawnKitchenObject(cutKitchenObjectSO, this);
         }
     }
 }
