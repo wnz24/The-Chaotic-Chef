@@ -5,13 +5,13 @@ using UnityEngine;
 /// CuttingCounter handles cutting interactions (like chopping vegetables).
 /// Inherits from BaseCounter.
 /// </summary>
-public class CuttingCounter : BaseCounter
+public class CuttingCounter : BaseCounter,IHasProgress
 {
     // List of all cutting recipes available for this counter
     [SerializeField] private CuttingRecipeSO[] cuttingRecipeSOArray;
 
     // Event triggered when cutting progress changes (used for UI progress bars)
-    public event EventHandler<OnProgressChangedEventArgs> OnProgressChanged;
+    public event EventHandler<IHasProgress.OnProgressChangedEventArgs> OnProgressChanged;
 
     // Event triggered every time a cut action is performed
     public event EventHandler OnCut;
@@ -22,11 +22,7 @@ public class CuttingCounter : BaseCounter
     /// <summary>
     /// Event data for progress updates
     /// </summary>
-    public class OnProgressChangedEventArgs : EventArgs
-    {
-        // Progress value normalized between 0 and 1
-        public float progressNormalized;
-    }
+   
 
     /// <summary>
     /// Handles normal interaction (pickup / drop items)
@@ -51,7 +47,7 @@ public class CuttingCounter : BaseCounter
                     cuttingProgress = 0;
 
                     // Notify listeners that progress has reset
-                    OnProgressChanged?.Invoke(this, new OnProgressChangedEventArgs
+                    OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs
                     {
                         // Normalize progress (0 / max)
                         progressNormalized = (float)cuttingProgress /
@@ -77,7 +73,7 @@ public class CuttingCounter : BaseCounter
                 GetKitchenObject().SetKitchenObjectParent(player);
 
                 // Reset progress UI when object is removed
-                OnProgressChanged?.Invoke(this, new OnProgressChangedEventArgs
+                OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs
                 {
                     progressNormalized = 0f
                 });
@@ -104,7 +100,7 @@ public class CuttingCounter : BaseCounter
                 GetRecipeSOWithInput(GetKitchenObject().GetKitchenObjectSO());
 
             // Update progress UI
-            OnProgressChanged?.Invoke(this, new OnProgressChangedEventArgs
+            OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs
             {
                 progressNormalized = (float)cuttingProgress /
                     cuttingRecipeSO.cuttingProgressMax
