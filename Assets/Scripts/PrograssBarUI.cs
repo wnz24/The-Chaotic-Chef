@@ -12,7 +12,7 @@ public class PrograssBarUI : MonoBehaviour
     private void Start()
     {
         hasProgress = HasProgresedGameObject.GetComponent<IHasProgress>();
-        if(hasProgress == null)
+        if (hasProgress == null)
         {
             Debug.Log("Game-Object" + HasProgresedGameObject + "Doest Not have a component that implements IHasProgress!");
         }
@@ -22,9 +22,9 @@ public class PrograssBarUI : MonoBehaviour
     }
     private void IHasProgress_OnProgressChanged(object sender, IHasProgress.OnProgressChangedEventArgs e)
     {
-       barImage.fillAmount = e.progressNormalized;
+        barImage.fillAmount = e.progressNormalized;
 
-        if(e.progressNormalized ==0f || e.progressNormalized == 1f)
+        if (e.progressNormalized == 0f || e.progressNormalized == 1f)
         {
             Hide();
         }

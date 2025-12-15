@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 
-public class Player : MonoBehaviour,IKitchenObjectParent
+public class Player : MonoBehaviour, IKitchenObjectParent
 {
     //everything else will have both read and write access
     public static Player Instance { get; set; }
@@ -20,11 +20,11 @@ public class Player : MonoBehaviour,IKitchenObjectParent
 
     //Events
     //Generic
-    public event EventHandler <OnSelectedCounterChangedEventArgs> OnSelectedCounterChanged;
+    public event EventHandler<OnSelectedCounterChangedEventArgs> OnSelectedCounterChanged;
 
     private void Awake()
     {
-        if(Instance != null)
+        if (Instance != null)
         {
             Debug.LogError("There is more than one Player instance");
         }
@@ -44,22 +44,22 @@ public class Player : MonoBehaviour,IKitchenObjectParent
 
     private void GameInput_OnInteractAction(object sender, System.EventArgs e)
     {
-        if(SelectedCounter != null)
+        if (SelectedCounter != null)
         {
             SelectedCounter.Interact(this);
             return;
         }
-       
+
     }
     private void OnAlternateInteractAction(object sender, System.EventArgs e)
     {
-        if(SelectedCounter != null)
+        if (SelectedCounter != null)
         {
             Debug.Log("Alternate Interact");
             SelectedCounter.InteractAlternate(this);
             return;
         }
-       
+
     }
 
     private void Update()
@@ -106,7 +106,8 @@ public class Player : MonoBehaviour,IKitchenObjectParent
 
     }
 
-    public void HandleMovement() {
+    public void HandleMovement()
+    {
         Vector2 inputVector = GameInput.Instance.GetMovementVectorNormalized();
         Vector3 moveDir = new Vector3(inputVector.x, 0, inputVector.y);
 
@@ -124,7 +125,7 @@ public class Player : MonoBehaviour,IKitchenObjectParent
 
             //Attempt only X movement
             Vector3 moveDirX = new Vector3(moveDir.x, 0, 0).normalized;
-            canMove = moveDir.x !=0 && !Physics.CapsuleCast(
+            canMove = moveDir.x != 0 && !Physics.CapsuleCast(
             transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirX, moveDistance
             );
 
@@ -136,7 +137,7 @@ public class Player : MonoBehaviour,IKitchenObjectParent
             {
                 //Attempt only Z movement
                 Vector3 moveDirZ = new Vector3(0, 0, moveDir.z).normalized;
-                canMove =moveDir.z != 0 && !Physics.CapsuleCast(
+                canMove = moveDir.z != 0 && !Physics.CapsuleCast(
                 transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirZ, moveDistance
                 );
                 if (canMove)
@@ -159,7 +160,7 @@ public class Player : MonoBehaviour,IKitchenObjectParent
         //Debug.Log($"Input Vector: {inputVector}");
     }
 
-    private void SetSelectedCounter (BaseCounter selectedCounter)
+    private void SetSelectedCounter(BaseCounter selectedCounter)
     {
         this.SelectedCounter = selectedCounter;
         OnSelectedCounterChanged?.Invoke(this, new OnSelectedCounterChangedEventArgs

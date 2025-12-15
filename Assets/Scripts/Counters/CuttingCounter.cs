@@ -5,7 +5,7 @@ using UnityEngine;
 /// CuttingCounter handles cutting interactions (like chopping vegetables).
 /// Inherits from BaseCounter.
 /// </summary>
-public class CuttingCounter : BaseCounter,IHasProgress
+public class CuttingCounter : BaseCounter, IHasProgress
 {
     // List of all cutting recipes available for this counter
     [SerializeField] private CuttingRecipeSO[] cuttingRecipeSOArray;
@@ -22,7 +22,7 @@ public class CuttingCounter : BaseCounter,IHasProgress
     /// <summary>
     /// Event data for progress updates
     /// </summary>
-   
+
 
     /// <summary>
     /// Handles normal interaction (pickup / drop items)
