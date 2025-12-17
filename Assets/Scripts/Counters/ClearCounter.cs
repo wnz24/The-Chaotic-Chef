@@ -4,12 +4,12 @@ using UnityEngine;
 public class ClearCounter: BaseCounter,IKitchenObjectParent
 {
 
-    [SerializeField] private ScriptableObjectSO kitchenObjectSO;
+    [SerializeField] private KitchenObjectSO kitchenObjectSO;
 
 
     public override void Interact(Player player)
     {
-        Debug.Log("Interacting with Clear Counter");
+      
 
         if (!HasKitchenObject())
         {
@@ -31,6 +31,33 @@ public class ClearCounter: BaseCounter,IKitchenObjectParent
             if (player.HasKitchenObject())
             {
                 //player is carring something
+                if (player.GetKitchenObject().TryGetPlate(out PlateKitchenObject plateKitchenObject))
+                {
+                    Debug.Log(GetKitchenObject().GetKitchenObjectSO().name);
+                    Debug.Log(plateKitchenObject);
+
+                    //player is holding a plate
+                    if (plateKitchenObject.TryAddIngredient(
+                       GetKitchenObject().GetKitchenObjectSO()))
+                    {
+                        GetKitchenObject().DestroySelf();
+
+                    }
+                }
+                else
+                {
+                    //player is not holding a plate
+                    if(GetKitchenObject().TryGetPlate(out PlateKitchenObject plateKitchenObjectOnCounter))
+                    {
+                        //Counter is holding a plate
+                        if (plateKitchenObjectOnCounter.TryAddIngredient(
+                           player.GetKitchenObject().GetKitchenObjectSO()))
+                        {
+                            player.GetKitchenObject().DestroySelf();
+                        }
+                    }
+                }
+
             }
             else
             {

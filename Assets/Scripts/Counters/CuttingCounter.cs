@@ -66,6 +66,17 @@ public class CuttingCounter : BaseCounter, IHasProgress
             if (player.HasKitchenObject())
             {
                 // Player is already carrying something (nothing happens)
+                //player is carring something
+                if (player.GetKitchenObject().TryGetPlate(out PlateKitchenObject plateKitchenObject))
+                {
+                    //player is holding a plate
+                    if (plateKitchenObject.TryAddIngredient(
+                       GetKitchenObject().GetKitchenObjectSO()))
+                    {
+                        GetKitchenObject().DestroySelf();
+
+                    }
+                }
             }
             else
             {
@@ -110,7 +121,7 @@ public class CuttingCounter : BaseCounter, IHasProgress
             if (cuttingProgress >= cuttingRecipeSO.cuttingProgressMax)
             {
                 // Get the output item
-                ScriptableObjectSO outputKitchenObjectSO =
+                KitchenObjectSO outputKitchenObjectSO =
                     GetOutputForInput(GetKitchenObject().GetKitchenObjectSO());
 
                 // Destroy the input object
@@ -125,7 +136,7 @@ public class CuttingCounter : BaseCounter, IHasProgress
     /// <summary>
     /// Returns the output KitchenObjectSO for a given input
     /// </summary>
-    private ScriptableObjectSO GetOutputForInput(ScriptableObjectSO inputKitchenObjectSO)
+    private KitchenObjectSO GetOutputForInput(KitchenObjectSO inputKitchenObjectSO)
     {
         CuttingRecipeSO cuttingRecipeSO = GetRecipeSOWithInput(inputKitchenObjectSO);
 
@@ -142,7 +153,7 @@ public class CuttingCounter : BaseCounter, IHasProgress
     /// <summary>
     /// Checks if a recipe exists for the given input object
     /// </summary>
-    private bool HasRecipeWithInput(ScriptableObjectSO inputKitchenObjectSO)
+    private bool HasRecipeWithInput(KitchenObjectSO inputKitchenObjectSO)
     {
         CuttingRecipeSO cuttingRecipeSO = GetRecipeSOWithInput(inputKitchenObjectSO);
         return cuttingRecipeSO != null;
@@ -151,7 +162,7 @@ public class CuttingCounter : BaseCounter, IHasProgress
     /// <summary>
     /// Finds and returns the cutting recipe for a given input object
     /// </summary>
-    private CuttingRecipeSO GetRecipeSOWithInput(ScriptableObjectSO inputKitchenObjectSO)
+    private CuttingRecipeSO GetRecipeSOWithInput(KitchenObjectSO inputKitchenObjectSO)
     {
         foreach (CuttingRecipeSO cuttingRecipeSO in cuttingRecipeSOArray)
         {

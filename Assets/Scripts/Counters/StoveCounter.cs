@@ -138,6 +138,25 @@ public class StoveCounter : BaseCounter, IHasProgress
             if (player.HasKitchenObject())
             {
                 //player is car ring something
+                //player is carring something
+                if (player.GetKitchenObject().TryGetPlate(out PlateKitchenObject plateKitchenObject))
+                {
+                    //player is holding a plate
+                    if (plateKitchenObject.TryAddIngredient(
+                       GetKitchenObject().GetKitchenObjectSO()))
+                    {
+                        GetKitchenObject().DestroySelf();
+                        OnStateChanged?.Invoke(this, new onStateChangedEventArgs
+                        {
+                            state = state
+                        });
+                        OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs
+                        {
+                            progressNormalized = 0f
+                        });
+
+                    }
+                }
             }
             else
             {
@@ -156,7 +175,7 @@ public class StoveCounter : BaseCounter, IHasProgress
         }
     }
 
-    private ScriptableObjectSO GetOutputForInput(ScriptableObjectSO inputKitchenObjectSO)
+    private KitchenObjectSO GetOutputForInput(KitchenObjectSO inputKitchenObjectSO)
     {
         FryingRecipeSO fryingRecipeSO = GetFryingRecipeSOWithInput(inputKitchenObjectSO);
         if (fryingRecipeSO != null)
@@ -170,13 +189,13 @@ public class StoveCounter : BaseCounter, IHasProgress
 
     }
 
-    private bool HasRecipeWithInput(ScriptableObjectSO inputKitchenObjectSO)
+    private bool HasRecipeWithInput(KitchenObjectSO inputKitchenObjectSO)
     {
         FryingRecipeSO fryingRecipeSO = GetFryingRecipeSOWithInput(inputKitchenObjectSO);
         return fryingRecipeSO != null;
     }
 
-    private FryingRecipeSO GetFryingRecipeSOWithInput(ScriptableObjectSO inputKitchenObjectSO)
+    private FryingRecipeSO GetFryingRecipeSOWithInput(KitchenObjectSO inputKitchenObjectSO)
     {
         foreach (FryingRecipeSO fryingRecipeSO in fryingRecipeSOArray)
         {
@@ -187,7 +206,7 @@ public class StoveCounter : BaseCounter, IHasProgress
         }
         return null;
     }
-    private BurningRecipeSO GetBurningRecipeSOWithInput(ScriptableObjectSO inputKitchenObjectSO)
+    private BurningRecipeSO GetBurningRecipeSOWithInput(KitchenObjectSO inputKitchenObjectSO)
     {
         foreach (BurningRecipeSO burningRecipeSO in burningRecipeSOArray)
         {

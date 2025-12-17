@@ -5,7 +5,7 @@ public class PlatesCounter : BaseCounter
 {
     private float SPawnPlateTimer;
     private float SpawnPlateTimerMax = 4f;
-    [SerializeField] private ScriptableObjectSO plateKitchenObjectSO;
+    [SerializeField] private KitchenObjectSO plateKitchenObjectSO;
     private int platesSpawnAmountMax = 4;
     private int platesSpawnAmount;
 
