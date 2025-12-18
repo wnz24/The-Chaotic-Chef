@@ -1,3 +1,5 @@
+using JetBrains.Annotations;
+using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -9,8 +11,16 @@ public class PlateKitchenObject : KitchenObject
 {
     [SerializeField] private List<KitchenObjectSO> validKitchenObjectSOList;
     private List<KitchenObjectSO> KitchenObjectSOList;
+
+
+    public event EventHandler<OnIngrideintAddedEventArgs> OnIngrideintAdded;
+    public class OnIngrideintAddedEventArgs : EventArgs
+    { 
+        public KitchenObjectSO kitchenObjectSO;
+    }
     
-    private void Awake()
+ 
+private void Awake()
     {
         KitchenObjectSOList = new List<KitchenObjectSO>();
     }
@@ -33,6 +43,10 @@ public class PlateKitchenObject : KitchenObject
             Debug.Log("Ingrident Added to Plate");
 
             KitchenObjectSOList.Add(kitchenObjectSO);
+            OnIngrideintAdded?.Invoke(this, new OnIngrideintAddedEventArgs
+            {
+                kitchenObjectSO = kitchenObjectSO
+            });
             return true;
         }
     }

@@ -42,6 +42,11 @@ public class StoveCounter : BaseCounter, IHasProgress
                 case State.Idle:
                     break;
                 case State.Frying:
+                    if (fryingRecipeSO == null)
+                    {
+                        Debug.Log("fryingRecipeSO is null");    
+                        return;
+                    }
                     fryingTimer += Time.deltaTime;
                     OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs
                     {
@@ -66,6 +71,11 @@ public class StoveCounter : BaseCounter, IHasProgress
                     }
                     break;
                 case State.Fried:
+                    if (fryingRecipeSO == null)
+                    {
+                        Debug.Log("BurningRecipeSO is null");
+                        return;
+                    }
                     burningTimer += Time.deltaTime;
                     OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs
                     {
@@ -210,7 +220,7 @@ public class StoveCounter : BaseCounter, IHasProgress
     {
         foreach (BurningRecipeSO burningRecipeSO in burningRecipeSOArray)
         {
-            if (fryingRecipeSO.input == inputKitchenObjectSO)
+            if (burningRecipeSO.input == inputKitchenObjectSO)
             {
                 return burningRecipeSO;
             }
