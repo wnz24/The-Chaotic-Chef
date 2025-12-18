@@ -51,5 +51,10 @@ private void Awake()
         }
     }
 
+    public List<KitchenObjectSO> GetKitchenObjectSOList()
+    {
+        return KitchenObjectSOList;
+    }
+
 
 }
