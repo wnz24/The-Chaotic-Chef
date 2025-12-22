@@ -7,6 +7,7 @@ using UnityEngine;
 /// </summary>
 public class CuttingCounter : BaseCounter, IHasProgress
 {
+    public static event EventHandler OnAnyCut;
     // List of all cutting recipes available for this counter
     [SerializeField] private CuttingRecipeSO[] cuttingRecipeSOArray;
 
@@ -15,6 +16,7 @@ public class CuttingCounter : BaseCounter, IHasProgress
 
     // Event triggered every time a cut action is performed
     public event EventHandler OnCut;
+    
 
     // Tracks current cutting progress
     private int cuttingProgress;
@@ -105,6 +107,8 @@ public class CuttingCounter : BaseCounter, IHasProgress
 
             // Trigger cut animation / sound event
             OnCut?.Invoke(this, EventArgs.Empty);
+
+            OnAnyCut?.Invoke(this, EventArgs.Empty);
 
             // Get the matching cutting recipe
             CuttingRecipeSO cuttingRecipeSO =
