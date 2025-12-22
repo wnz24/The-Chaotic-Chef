@@ -29,18 +29,15 @@ private void Awake()
         if (!validKitchenObjectSOList.Contains(kitchenObjectSO))
         {
             //Not a valid ingredient
-            Debug.Log("Not a valid ingredient");    
             return false;
         }
         if (KitchenObjectSOList.Contains(kitchenObjectSO))
         {
             //Ingredient already on plate
-            Debug.Log("Ingredient already on plate");
             return false;
         }
         else
         {
-            Debug.Log("Ingrident Added to Plate");
 
             KitchenObjectSOList.Add(kitchenObjectSO);
             OnIngrideintAdded?.Invoke(this, new OnIngrideintAddedEventArgs
