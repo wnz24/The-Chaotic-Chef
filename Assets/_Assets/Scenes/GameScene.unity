@@ -1635,6 +1635,7 @@ GameObject:
   m_Component:
   - component: {fileID: 937764258}
   - component: {fileID: 937764257}
+  - component: {fileID: 937764259}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1676,6 +1677,18 @@ Transform:
   - {fileID: 2106828195}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &937764259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 937764256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2c49542a5d0b924b94548106e2f33a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &940103241
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2940,6 +2953,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1056802421}
     m_Modifications:
+    - target: {fileID: 45479761772664938, guid: ee9b3a8c7e6c50b4883bb454b512cf26, type: 3}
+      propertyPath: stoveCounter
+      value: 
+      objectReference: {fileID: 1679156496}
     - target: {fileID: 5733270168627702179, guid: ee9b3a8c7e6c50b4883bb454b512cf26, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3
@@ -2994,6 +3011,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5733270168627702179, guid: ee9b3a8c7e6c50b4883bb454b512cf26, type: 3}
   m_PrefabInstance: {fileID: 1679156494}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1679156496 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6315931682548897144, guid: ee9b3a8c7e6c50b4883bb454b512cf26, type: 3}
+  m_PrefabInstance: {fileID: 1679156494}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67dde00f526ec9e4f85f482e81409cbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1693108338
 GameObject:
   m_ObjectHideFlags: 0

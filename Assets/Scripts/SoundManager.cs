@@ -3,8 +3,18 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
+    public static SoundManager Instance { get; private set; }
     [SerializeField] private AudioClipsSO audioClipsSO;
 
+
+    private void Awake()
+    {
+        if (Instance != null)
+        {
+            Debug.LogError("There is more than one SoundManager instance");
+        }
+        Instance = this;
+    }
     private void Start()
     {
         DeliveryManager.Instance.OnRecipeCompleted += DeliveryManager_OnRecipeCompleted;
@@ -57,8 +67,10 @@ public class SoundManager : MonoBehaviour
     {
         AudioSource.PlayClipAtPoint(audioClipArray[UnityEngine.Random.Range(0,audioClipArray.Length)], position, volume);
     }
-    private void PlaySound(AudioClip audioClip, Vector3 position, float volume = 1f)
+    public void PlayFootStepSound(Vector3 position)
     {
-        AudioSource.PlayClipAtPoint(audioClip, position, volume);
+
+        PlaySound(audioClipsSO.footSteps, position, 1f);
     }
+
 }

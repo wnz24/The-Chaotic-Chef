@@ -156,6 +156,7 @@ public class StoveCounter : BaseCounter, IHasProgress
                        GetKitchenObject().GetKitchenObjectSO()))
                     {
                         GetKitchenObject().DestroySelf();
+                        state = State.Idle;
                         OnStateChanged?.Invoke(this, new onStateChangedEventArgs
                         {
                             state = state
