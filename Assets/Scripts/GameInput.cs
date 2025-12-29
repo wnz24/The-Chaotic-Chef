@@ -11,7 +11,7 @@ public class GameInput : MonoBehaviour
 
     public event EventHandler OnInteractAction;
     public event EventHandler OnAlternateInteractAction;
-
+    public event EventHandler OnPauseAction;
     private void Awake()
     {
         Instance = this;
@@ -20,7 +20,12 @@ public class GameInput : MonoBehaviour
 
         playerInputActions.Player.interact.performed += Interact_performed;
         playerInputActions.Player.alternateInteract.performed += AltenateInteract_performed;
+        playerInputActions.Player.pause.performed += Pause_performed;
+    }
 
+    private void Pause_performed(InputAction.CallbackContext context)
+    {
+        OnPauseAction?.Invoke(this, EventArgs.Empty);
     }
 
     private void AltenateInteract_performed(InputAction.CallbackContext context)

@@ -118,6 +118,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""9c9cacd5-1235-49dc-a656-5d3764876fdb"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -252,6 +261,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""alternateInteract"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e55dd7a2-00a6-4bbc-bafe-4f1a719e3006"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -263,6 +283,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_move = m_Player.FindAction("move", throwIfNotFound: true);
         m_Player_interact = m_Player.FindAction("interact", throwIfNotFound: true);
         m_Player_alternateInteract = m_Player.FindAction("alternateInteract", throwIfNotFound: true);
+        m_Player_pause = m_Player.FindAction("pause", throwIfNotFound: true);
     }
 
     ~@PlayerInputActions()
@@ -346,6 +367,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_move;
     private readonly InputAction m_Player_interact;
     private readonly InputAction m_Player_alternateInteract;
+    private readonly InputAction m_Player_pause;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -369,6 +391,10 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/alternateInteract".
         /// </summary>
         public InputAction @alternateInteract => m_Wrapper.m_Player_alternateInteract;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/pause".
+        /// </summary>
+        public InputAction @pause => m_Wrapper.m_Player_pause;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -404,6 +430,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @alternateInteract.started += instance.OnAlternateInteract;
             @alternateInteract.performed += instance.OnAlternateInteract;
             @alternateInteract.canceled += instance.OnAlternateInteract;
+            @pause.started += instance.OnPause;
+            @pause.performed += instance.OnPause;
+            @pause.canceled += instance.OnPause;
         }
 
         /// <summary>
@@ -424,6 +453,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @alternateInteract.started -= instance.OnAlternateInteract;
             @alternateInteract.performed -= instance.OnAlternateInteract;
             @alternateInteract.canceled -= instance.OnAlternateInteract;
+            @pause.started -= instance.OnPause;
+            @pause.performed -= instance.OnPause;
+            @pause.canceled -= instance.OnPause;
         }
 
         /// <summary>
@@ -485,5 +517,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnAlternateInteract(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "pause" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnPause(InputAction.CallbackContext context);
     }
 }
