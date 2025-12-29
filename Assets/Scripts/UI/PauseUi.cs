@@ -1,10 +1,24 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PauseUi : MonoBehaviour
 {
+    [SerializeField] private Button mainMenuButton;
+    [SerializeField] private Button resumeButton;
 
 
+    private void Awake()
+    {
+        resumeButton.onClick.AddListener(() =>
+        {
+           GameManager.Instance.TogglePauseGame();
+        });
+        mainMenuButton.onClick.AddListener(() =>
+        {
+            Loader.LoadTargetScene(Loader.Scene.MainMenu);
+        });
+    }
     private void Start()
     {
         Hide();
@@ -31,4 +45,10 @@ public class PauseUi : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
+
+
+
 }
+
+
+

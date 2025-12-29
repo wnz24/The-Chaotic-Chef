@@ -21,14 +21,11 @@ public class CuttingCounter : BaseCounter, IHasProgress
     // Tracks current cutting progress
     private int cuttingProgress;
 
-    /// <summary>
-    /// Event data for progress updates
-    /// </summary>
-
-
-    /// <summary>
-    /// Handles normal interaction (pickup / drop items)
-    /// </summary>
+   
+   new public static void ResetStaticData()
+    {
+        OnAnyCut = null;
+    }
     public override void Interact(Player player)
     {
         Debug.Log("Interacting with Clear Counter");
