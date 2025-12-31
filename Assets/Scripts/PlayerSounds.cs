@@ -21,7 +21,6 @@ public class PlayerSounds : MonoBehaviour
 
             if (player.IsWalking())
             {
-                Debug.Log("Playing footstep sound");
                 SoundManager.Instance.PlayFootStepSound(player.transform.position);
             }
         }
