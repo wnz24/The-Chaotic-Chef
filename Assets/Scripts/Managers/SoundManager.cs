@@ -6,7 +6,7 @@ public class SoundManager : MonoBehaviour
     public static SoundManager Instance { get; private set; }
     [SerializeField] private AudioClipsSO audioClipsSO;
     private float volume = 1f;
-
+    private const string PlayerPrefs_SOUND_VOLUME_KEY = "SoundEffect";
     private void Awake()
     {
         if (Instance != null)
@@ -14,6 +14,7 @@ public class SoundManager : MonoBehaviour
             Debug.LogError("There is more than one SoundManager instance");
         }
         Instance = this;
+        volume = PlayerPrefs.GetFloat(PlayerPrefs_SOUND_VOLUME_KEY, 1f);
     }
     private void Start()
     {
@@ -80,6 +81,8 @@ public class SoundManager : MonoBehaviour
         {
             volume = 0f;
         }
+        PlayerPrefs.SetFloat(PlayerPrefs_SOUND_VOLUME_KEY, volume);
+        PlayerPrefs.Save();
     }
 
     public float GetVolume()

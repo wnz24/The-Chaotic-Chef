@@ -1,16 +1,22 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameOverUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI recipesDeliveredText;
+    [SerializeField] private Button MainMenuButton;
 
 
     private void Start()
     {
         GameManager.Instance.OnStateChnaged += GameManager_OnStateChnaged;
         Hide();
+        MainMenuButton.onClick.AddListener(() =>
+        {
+            Loader.LoadTargetScene(Loader.Scene.MainMenu);
+        });
     }
 
     private void GameManager_OnStateChnaged(object sender, EventArgs e)
