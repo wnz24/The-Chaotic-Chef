@@ -110,17 +110,23 @@ public class GameManager : MonoBehaviour
 
     public void TogglePauseGame()
     {
+       
+
         IsGamePaused = !IsGamePaused;
+
         if (IsGamePaused)
         {
-
             Time.timeScale = 0f;
             OnGamePaused?.Invoke(this, EventArgs.Empty);
         }
-        if (!IsGamePaused)
+        else
         {
             Time.timeScale = 1f;
-            OnGameUnPause.Invoke(this, EventArgs.Empty);
+            OnGameUnPause?.Invoke(this, EventArgs.Empty);
         }
+    }
+    public bool IsPaused()
+    {
+        return IsGamePaused;
     }
 }

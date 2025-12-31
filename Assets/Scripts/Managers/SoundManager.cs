@@ -5,7 +5,7 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance { get; private set; }
     [SerializeField] private AudioClipsSO audioClipsSO;
-
+    private float volume = 1f;
 
     private void Awake()
     {
@@ -63,14 +63,28 @@ public class SoundManager : MonoBehaviour
         PlaySound(audioClipsSO.deliverySuccess, deliveryCounter.transform.position);
     }
 
-    private void PlaySound(AudioClip[] audioClipArray, Vector3 position, float volume = 1f)
+    private void PlaySound(AudioClip[] audioClipArray, Vector3 position, float volumeMultiplier = 1f)
     {
-        AudioSource.PlayClipAtPoint(audioClipArray[UnityEngine.Random.Range(0,audioClipArray.Length)], position, volume);
+        AudioSource.PlayClipAtPoint(audioClipArray[UnityEngine.Random.Range(0,audioClipArray.Length)], position, volumeMultiplier * volume);
     }
     public void PlayFootStepSound(Vector3 position)
     {
 
         PlaySound(audioClipsSO.footSteps, position, 1f);
+    }
+
+    public void ChangeVolume()
+    {
+        volume += .1f;
+        if(volume > 1f)
+        {
+            volume = 0f;
+        }
+    }
+
+    public float GetVolume()
+    {
+        return volume;
     }
 
 }

@@ -6,6 +6,7 @@ public class PauseUi : MonoBehaviour
 {
     [SerializeField] private Button mainMenuButton;
     [SerializeField] private Button resumeButton;
+    [SerializeField] private Button optionsButton;
 
 
     private void Awake()
@@ -17,6 +18,11 @@ public class PauseUi : MonoBehaviour
         mainMenuButton.onClick.AddListener(() =>
         {
             Loader.LoadTargetScene(Loader.Scene.MainMenu);
+        });
+        optionsButton.onClick.AddListener(() =>
+        {
+            Hide();
+           OptionsMenuUI.Instance.Show();
         });
     }
     private void Start()
