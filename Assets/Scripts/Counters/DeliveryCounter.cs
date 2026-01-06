@@ -21,7 +21,7 @@ public class DeliveryCOunter : BaseCounter
                     //Deliver the plate
 
                 DeliveryManager.Instance.DeliverRecipe(plateKitchenObject);
-                Debug.Log("Delivered");
+            
                     player.GetKitchenObject().DestroySelf();
                
             }

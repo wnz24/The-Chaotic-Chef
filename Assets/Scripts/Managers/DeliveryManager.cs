@@ -36,7 +36,7 @@ public class DeliveryManager : MonoBehaviour
             if (GameManager.Instance.IsGamePlaying() && waitingRecipeSOList.Count < waitingRecipeMax)
             {
                 RecipeSO waitingRecipeList = recipeSOList.recipeListSO[UnityEngine.Random.Range(0, recipeSOList.recipeListSO.Count)];
-                Debug.Log(waitingRecipeList);
+               
                 waitingRecipeSOList.Add(waitingRecipeList);
                 OnRecipeSpawned?.Invoke(this, EventArgs.Empty);
             }
@@ -84,7 +84,7 @@ public class DeliveryManager : MonoBehaviour
                 if (PlateCOntentsMatchRecipe)
                 {
                     //Player delivered the correct recipe
-                    Debug.Log("Delivered correct recipe");
+                   
 
                     successfullRecipeAmount++;
                     waitingRecipeSOList.RemoveAt(i);
@@ -98,7 +98,7 @@ public class DeliveryManager : MonoBehaviour
         }
         //No matches found
         //Player did not deliver correct recipe
-        //Debug.Log("Delivered incorrect recipe");
+      
         OnRecipeFailed?.Invoke(this, EventArgs.Empty);
     }
 

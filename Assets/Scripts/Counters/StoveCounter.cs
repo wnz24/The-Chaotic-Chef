@@ -44,7 +44,7 @@ public class StoveCounter : BaseCounter, IHasProgress
                 case State.Frying:
                     if (fryingRecipeSO == null)
                     {
-                        Debug.Log("fryingRecipeSO is null");    
+                        //Debug.Log("fryingRecipeSO is null");    
                         return;
                     }
                     fryingTimer += Time.deltaTime;
@@ -73,7 +73,7 @@ public class StoveCounter : BaseCounter, IHasProgress
                 case State.Fried:
                     if (fryingRecipeSO == null)
                     {
-                        Debug.Log("BurningRecipeSO is null");
+                        //Debug.Log("BurningRecipeSO is null");
                         return;
                     }
                     burningTimer += Time.deltaTime;
@@ -227,6 +227,11 @@ public class StoveCounter : BaseCounter, IHasProgress
             }
         }
         return null;
+    }
+
+    public bool IsFried()
+    {
+        return state == State.Fried;
     }
 }
 
